@@ -1,0 +1,4 @@
+git clone https://github.com/aarmn/ILL_ROCK_GITHUB.git
+cd ILL_ROCK_GITHUB
+echo "ILL ROCK" >> rock.txt
+git push
