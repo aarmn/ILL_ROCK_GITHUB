@@ -22,24 +22,25 @@ WantedBy=multi-user.target
 '''
 @snoop
 def main():
-    if "--serv" in sys.argv:
+    if os.path.isfile("ran_once"):
         with open("cred.txt","r") as f:
             user = f.readline()
         while (True):
             os.system("bash pull.sh "+user)
-            sleep(random.randrange(3600*1,3600*3))
+#            sleep(random.randrange(3600*1,3600*3))
             os.system("bash push.sh "+user)
             sleep(random.randrange(3600*1,3600*3))
     else:
         with open("cred.txt","w") as f: 
             f.write(input("tell me your cheater-ass github username: "))
-        systemd_serv_path = "/etc/systemd/system/github_stats_ducker.service"
+        systemd_serv_path = "/etc/systemd/system/githubstatsducker.service"
         with open(systemd_serv_path,"w") as f:
             f.write(systemd_service.format(__file__))
         os.system("sudo systemctl daemon-reload")
         sleep(2)
-        os.system("sudo systemctl enable github_stats_ducker.service")
+        os.system("sudo systemctl enable githubstatsducker.service")
         sleep(2)
-        os.system("sudo systemctl start github_stats_ducker.service")
+        os.system("sudo systemctl start githubstatsducker.service")
+        os.system("touch ran_once")
 
 main()
