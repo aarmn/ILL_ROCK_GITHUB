@@ -26,6 +26,8 @@ def main():
         with open("cred.txt","r") as f:
             user = f.readline()
         while (True):
+            os.system("bash pull.sh "+user)
+            sleep(random.randrange(3600*1,3600*3))
             os.system("bash push.sh "+user)
             sleep(random.randrange(3600*1,3600*3))
     else:
