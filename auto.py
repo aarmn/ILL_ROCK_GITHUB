@@ -15,7 +15,7 @@ After=multi-user.target
 [Service]
 Type=simple
 Restart=always
-ExecStart=/bin/python3 {} --serv
+ExecStart=/usr/bin/python3 {} 
 
 [Install]
 WantedBy=multi-user.target
@@ -35,7 +35,7 @@ def main():
             f.write(input("tell me your cheater-ass github username: "))
         systemd_serv_path = "/etc/systemd/system/githubstatsducker.service"
         with open(systemd_serv_path,"w") as f:
-            f.write(systemd_service.format(__file__))
+            f.write(systemd_service.format(os.path.join(sys.getcwd(),__file__)))
         os.system("sudo systemctl daemon-reload")
         sleep(2)
         os.system("sudo systemctl enable githubstatsducker.service")
